@@ -40,6 +40,7 @@ setupExampleModule("example-bukkit")
 setupExampleModule("example-bungee")
 setupExampleModule("example-jda")
 setupExampleModule("example-velocity")
+setupExampleModule("example-sponge")
 
 fun setupIrcModule(name: String) =
         setupSubproject(name, file("cloud-irc/$name"))
