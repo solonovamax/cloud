@@ -120,8 +120,21 @@ public interface ArgumentParser<C, T> {
      *
      * @return The number of arguments tha the parser expects
      * @since 1.1.0
+     * @deprecated See {@link ArgumentParser#requestedArgumentCount()}
      */
+    @Deprecated
     default int getRequestedArgumentCount() {
+        return DEFAULT_ARGUMENT_COUNT;
+    }
+
+    /**
+     * Get the amount of arguments that this parsers seeks to
+     * consume
+     *
+     * @return The number of arguments tha the parser expects
+     * @since 1.1.0
+     */
+    default int requestedArgumentCount() {
         return DEFAULT_ARGUMENT_COUNT;
     }
 

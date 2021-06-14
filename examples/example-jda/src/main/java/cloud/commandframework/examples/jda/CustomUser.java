@@ -67,8 +67,19 @@ public abstract class CustomUser {
      * Get the user that sent the message
      *
      * @return Sending user
+     * @deprecated See {@link CustomUser#user}
      */
+    @Deprecated
     public final @NonNull User getUser() {
+        return this.user;
+    }
+
+    /**
+     * Get the user that sent the message
+     *
+     * @return Sending user
+     */
+    public final @NonNull User user() {
         return this.user;
     }
 
@@ -76,8 +87,19 @@ public abstract class CustomUser {
      * Get the channel the message was sent in
      *
      * @return Message channel
+     * @deprecated See {@link CustomUser#channel()}
      */
+    @Deprecated
     public final @NonNull MessageChannel getChannel() {
+        return this.channel;
+    }
+
+    /**
+     * Get the channel the message was sent in
+     *
+     * @return Message channel
+     */
+    public @NonNull MessageChannel channel() {
         return this.channel;
     }
 

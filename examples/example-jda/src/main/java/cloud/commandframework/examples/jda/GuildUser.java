@@ -51,8 +51,19 @@ public final class GuildUser extends CustomUser {
      * Get the member that sent the message
      *
      * @return Sending member
+     * @deprecated See {@link GuildUser#member()}
      */
+    @Deprecated
     public @NonNull Member getMember() {
+        return this.member;
+    }
+
+    /**
+     * Get the member that sent the message
+     *
+     * @return Sending member
+     */
+    public @NonNull Member member() {
         return this.member;
     }
 
@@ -60,8 +71,20 @@ public final class GuildUser extends CustomUser {
      * Get the text channel the message was sent in
      *
      * @return Message channel
+     * @deprecated See {@link GuildUser#channel()}
      */
+    @Deprecated
     public @NonNull TextChannel getTextChannel() {
+        return this.channel;
+    }
+
+    /**
+     * Get the text channel the message was sent in
+     *
+     * @return Message channel
+     */
+    @Override
+    public @NonNull TextChannel channel() {
         return this.channel;
     }
 

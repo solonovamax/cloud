@@ -70,7 +70,7 @@ public final class ExampleBot {
         final JDA4CommandManager<CustomUser> commandManager = new JDA4CommandManager<>(
                 jda,
                 message -> "!",
-                (sender, permission) -> permissionRegistry.hasPermission(sender.getUser().getIdLong(), permission),
+                (sender, permission) -> permissionRegistry.hasPermission(sender.user().getIdLong(), permission),
                 CommandExecutionCoordinator.simpleCoordinator(),
                 sender -> {
                     MessageReceivedEvent event = sender.getEvent().orElse(null);
@@ -91,12 +91,12 @@ public final class ExampleBot {
                     MessageReceivedEvent event = user.getEvent().orElse(null);
                     if (user instanceof PrivateUser) {
                         PrivateUser privateUser = (PrivateUser) user;
-                        return new JDAPrivateSender(event, privateUser.getUser(), privateUser.getPrivateChannel());
+                        return new JDAPrivateSender(event, privateUser.user(), privateUser.channel());
                     }
 
                     if (user instanceof GuildUser) {
                         GuildUser guildUser = (GuildUser) user;
-                        return new JDAGuildSender(event, guildUser.getMember(), guildUser.getTextChannel());
+                        return new JDAGuildSender(event, guildUser.member(), guildUser.channel());
                     }
 
                     throw new UnsupportedOperationException();
@@ -106,7 +106,7 @@ public final class ExampleBot {
         commandManager.command(commandManager
                 .commandBuilder("ping")
                 .handler(context -> {
-                    context.getSender().getChannel().sendMessage("pong").complete();
+                    context.getSender().channel().sendMessage("pong").complete();
                 }));
 
         final Command.Builder<CustomUser> builder = commandManager.commandBuilder("permission");
@@ -120,7 +120,7 @@ public final class ExampleBot {
                     final String perm = context.get("perm");
 
                     permissionRegistry.add(user.getIdLong(), perm);
-                    context.getSender().getChannel().sendMessage("permission added").complete();
+                    context.getSender().channel().sendMessage("permission added").complete();
                 }));
 
         commandManager.command(builder
@@ -132,7 +132,7 @@ public final class ExampleBot {
                     final String perm = context.get("perm");
 
                     permissionRegistry.remove(user.getIdLong(), perm);
-                    context.getSender().getChannel().sendMessage("permission removed").complete();
+                    context.getSender().channel().sendMessage("permission removed").complete();
                 }));
 
         commandManager.command(commandManager
@@ -142,7 +142,7 @@ public final class ExampleBot {
                 .argument(UserArgument.of("user"))
                 .handler(context -> {
                     final GuildUser guildUser = (GuildUser) context.getSender();
-                    final TextChannel textChannel = guildUser.getTextChannel();
+                    final TextChannel textChannel = guildUser.channel();
                     final User user = context.get("user");
 
                     textChannel.getGuild().kick(user.getId()).complete();

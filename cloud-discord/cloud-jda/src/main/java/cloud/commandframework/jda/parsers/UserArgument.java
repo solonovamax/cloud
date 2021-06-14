@@ -116,8 +116,19 @@ public final class UserArgument<C> extends CommandArgument<C, User> {
      * Get the modes enabled on the parser
      *
      * @return List of Modes
+     * @deprecated See {@link UserArgument#modes()}
      */
+    @Deprecated
     public @NotNull Set<ParserMode> getModes() {
+        return this.modes;
+    }
+
+    /**
+     * Get the modes enabled on the parser
+     *
+     * @return List of Modes
+     */
+    public @NotNull Set<ParserMode> modes() {
         return this.modes;
     }
 
@@ -366,8 +377,19 @@ public final class UserArgument<C> extends CommandArgument<C, User> {
          * Get the users input
          *
          * @return Users input
+         * @deprecated See {@link UserParseException#input}
          */
+        @Deprecated
         public final @NonNull String getInput() {
+            return this.input;
+        }
+
+        /**
+         * Get the users input
+         *
+         * @return Users input
+         */
+        public final @NonNull String input() {
             return this.input;
         }
 
@@ -389,7 +411,7 @@ public final class UserArgument<C> extends CommandArgument<C, User> {
 
         @Override
         public @NonNull String getMessage() {
-            return String.format("Too many users found for '%s'.", getInput());
+            return String.format("Too many users found for '%s'.", this.input());
         }
 
     }
@@ -410,7 +432,7 @@ public final class UserArgument<C> extends CommandArgument<C, User> {
 
         @Override
         public @NonNull String getMessage() {
-            return String.format("User not found for '%s'.", getInput());
+            return String.format("User not found for '%s'.", this.input());
         }
 
     }

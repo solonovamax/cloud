@@ -91,8 +91,8 @@ public final class MappedArgumentParser<C, I, O> implements ArgumentParser<C, O>
     }
 
     @Override
-    public int getRequestedArgumentCount() {
-        return this.base.getRequestedArgumentCount();
+    public int requestedArgumentCount() {
+        return this.base.requestedArgumentCount();
     }
 
     @Override

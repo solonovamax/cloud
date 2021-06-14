@@ -88,7 +88,7 @@ public final class WrappedBrigadierParser<C, T> implements ArgumentParser<C, T> 
      * @return the argument type
      * @since 1.5.0
      */
-    public ArgumentType<T> getNativeArgument() {
+    public ArgumentType<T> nativeArgument() {
         return this.nativeType;
     }
 
@@ -103,7 +103,7 @@ public final class WrappedBrigadierParser<C, T> implements ArgumentParser<C, T> 
         if (inputQueue instanceof StringReader) {
             reader = (StringReader) inputQueue;
         } else if (inputQueue instanceof StringReaderAsQueue) {
-            reader = ((StringReaderAsQueue) inputQueue).getOriginal();
+            reader = ((StringReaderAsQueue) inputQueue).original();
         } else {
             reader = new QueueAsStringReader(inputQueue);
         }

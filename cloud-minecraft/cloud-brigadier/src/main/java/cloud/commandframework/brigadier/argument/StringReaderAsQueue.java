@@ -60,12 +60,21 @@ public interface StringReaderAsQueue extends Queue<String> {
      * Get the backing {@link StringReader} used to source data.
      *
      * @return the original reader
+     * @deprecated See {@link StringReaderAsQueue#original()}
      */
+    @Deprecated
     StringReader getOriginal();
+
+    /**
+     * Get the backing {@link StringReader} used to source data.
+     *
+     * @return the original reader
+     */
+    StringReader original();
 
     @Override
     default boolean isEmpty() {
-        return !this.getOriginal().canRead();
+        return !this.original().canRead();
     }
 
     @Override
@@ -75,13 +84,13 @@ public interface StringReaderAsQueue extends Queue<String> {
         }
 
         // check if the string is in the collection, and
-        final int cursor = this.getOriginal().getCursor();
-        final String contents = this.getOriginal().getString();
+        final int cursor = this.original().getCursor();
+        final String contents = this.original().getString();
         final int idx = contents.indexOf((String) element, cursor);
         if (idx == -1) {
             return false;
         }
-        final int length = this.getOriginal().getTotalLength();
+        final int length = this.original().getTotalLength();
         final int end = idx + contents.length();
 
         return (idx == cursor || Character.isWhitespace(contents.charAt(idx - 1)))
@@ -92,8 +101,8 @@ public interface StringReaderAsQueue extends Queue<String> {
     default @NonNull Iterator<String> iterator() {
         // lazily break into words -- doesn't consume though!
         return new Iterator<String>() {
-            private final String contents = StringReaderAsQueue.this.getOriginal().getString();
-            private int rangeStart = StringReaderAsQueue.this.getOriginal().getCursor();
+            private final String contents = StringReaderAsQueue.this.original().getString();
+            private int rangeStart = StringReaderAsQueue.this.original().getCursor();
             private int rangeEnd = this.calculateNextEnd();
 
             private int calculateNextEnd() {
@@ -204,7 +213,7 @@ public interface StringReaderAsQueue extends Queue<String> {
 
     @Override
     default void clear() { // consume all
-        this.getOriginal().setCursor(this.getOriginal().getTotalLength());
+        this.original().setCursor(this.original().getTotalLength());
     }
 
 }

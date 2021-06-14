@@ -77,18 +77,18 @@ public class StandardCommandSyntaxFormatter<C> implements CommandSyntaxFormatter
         }
         CommandTree.Node<CommandArgument<C, ?>> tail = node;
         while (tail != null && !tail.isLeaf()) {
-            if (tail.getChildren().size() > 1) {
+            if (tail.children().size() > 1) {
                 formattingInstance.appendBlankSpace();
-                final Iterator<CommandTree.Node<CommandArgument<C, ?>>> childIterator = tail.getChildren().iterator();
+                final Iterator<CommandTree.Node<CommandArgument<C, ?>>> childIterator = tail.children().iterator();
                 while (childIterator.hasNext()) {
                     final CommandTree.Node<CommandArgument<C, ?>> child = childIterator.next();
 
-                    if (child.getValue() instanceof StaticArgument) {
-                        formattingInstance.appendName(child.getValue().getName());
-                    } else if (child.getValue().isRequired()) {
-                        formattingInstance.appendRequired(child.getValue());
+                    if (child.value() instanceof StaticArgument) {
+                        formattingInstance.appendName(child.value().getName());
+                    } else if (child.value().isRequired()) {
+                        formattingInstance.appendRequired(child.value());
                     } else {
-                        formattingInstance.appendOptional(child.getValue());
+                        formattingInstance.appendOptional(child.value());
                     }
 
                     if (childIterator.hasNext()) {
@@ -97,7 +97,7 @@ public class StandardCommandSyntaxFormatter<C> implements CommandSyntaxFormatter
                 }
                 break;
             }
-            final CommandArgument<C, ?> argument = tail.getChildren().get(0).getValue();
+            final CommandArgument<C, ?> argument = tail.children().get(0).value();
             if (argument instanceof CompoundArgument) {
                 formattingInstance.appendBlankSpace();
                 formattingInstance.appendCompound((CompoundArgument<?, ?, ?>) argument);
@@ -112,7 +112,7 @@ public class StandardCommandSyntaxFormatter<C> implements CommandSyntaxFormatter
                     formattingInstance.appendOptional(argument);
                 }
             }
-            tail = tail.getChildren().get(0);
+            tail = tail.children().get(0);
         }
         return formattingInstance.toString();
     }

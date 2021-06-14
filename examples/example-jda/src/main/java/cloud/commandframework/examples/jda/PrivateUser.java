@@ -49,8 +49,20 @@ public final class PrivateUser extends CustomUser {
      * Get the private channel the message was sent in
      *
      * @return Private channel
+     * @deprecated See {@link PrivateUser#channel()}
      */
+    @Deprecated
     public @NonNull PrivateChannel getPrivateChannel() {
+        return this.privateChannel;
+    }
+
+    /**
+     * Get the private channel the message was sent in
+     *
+     * @return Private channel
+     */
+    @Override
+    public @NonNull PrivateChannel channel() {
         return this.privateChannel;
     }
 

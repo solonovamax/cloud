@@ -57,8 +57,19 @@ public final class CommandComponent<C> {
      * Gets the command component argument details
      *
      * @return command component argument details
+     * @deprecated {@link CommandComponent#argument()}
      */
+    @Deprecated
     public @NonNull CommandArgument<C, ?> getArgument() {
+        return this.argument;
+    }
+
+    /**
+     * Gets the command component argument details
+     *
+     * @return command component argument details
+     */
+    public @NonNull CommandArgument<C, ?> argument() {
         return this.argument;
     }
 

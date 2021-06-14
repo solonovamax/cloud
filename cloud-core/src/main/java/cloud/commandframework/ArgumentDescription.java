@@ -64,8 +64,17 @@ public interface ArgumentDescription {
      * Get the plain-text description.
      *
      * @return Command description
+     * @deprecated See {@link ArgumentDescription#description()}
      */
+    @Deprecated
     @NonNull String getDescription();
+
+    /**
+     * Get the plain-text description.
+     *
+     * @return Command description
+     */
+    @NonNull String description();
 
     /**
      * Get whether or not this description contains contents.
