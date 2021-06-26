@@ -243,8 +243,19 @@ public class EnumArgument<C, E extends Enum<E>> extends CommandArgument<C, E> {
          * Get the input provided by the sender
          *
          * @return Input
+         * @deprecated see {@link EnumParseException#input()}
          */
+        @Deprecated
         public @NonNull String getInput() {
+            return this.input;
+        }
+
+        /**
+         * Get the input provided by the sender
+         *
+         * @return Input
+         */
+        public @NonNull String input() {
             return this.input;
         }
 
@@ -252,8 +263,19 @@ public class EnumArgument<C, E extends Enum<E>> extends CommandArgument<C, E> {
          * Get the enum class that was attempted to be parsed
          *
          * @return Enum class
+         * @deprecated see {@link EnumParseException#enumClass()}
          */
+        @Deprecated
         public @NonNull Class<? extends Enum<?>> getEnumClass() {
+            return this.enumClass;
+        }
+
+        /**
+         * Get the enum class that was attempted to be parsed
+         *
+         * @return Enum class
+         */
+        public @NonNull Class<? extends Enum<?>> enumClass() {
             return this.enumClass;
         }
 

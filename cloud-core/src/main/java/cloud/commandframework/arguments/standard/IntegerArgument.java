@@ -122,8 +122,19 @@ public final class IntegerArgument<C> extends CommandArgument<C, Integer> {
      * Get the minimum accepted integer that could have been parsed
      *
      * @return Minimum integer
+     * @deprecated see {@link IntegerArgument#min()}
      */
+    @Deprecated
     public int getMin() {
+        return this.min;
+    }
+
+    /**
+     * Get the minimum accepted integer that could have been parsed
+     *
+     * @return Minimum integer
+     */
+    public int min() {
         return this.min;
     }
 
@@ -131,8 +142,19 @@ public final class IntegerArgument<C> extends CommandArgument<C, Integer> {
      * Get the maximum accepted integer that could have been parsed
      *
      * @return Maximum integer
+     * @deprecated see {@link IntegerArgument#max()}
      */
+    @Deprecated
     public int getMax() {
+        return this.max;
+    }
+
+    /**
+     * Get the maximum accepted integer that could have been parsed
+     *
+     * @return Maximum integer
+     */
+    public int max() {
         return this.max;
     }
 
@@ -286,8 +308,19 @@ public final class IntegerArgument<C> extends CommandArgument<C, Integer> {
          * Get the minimum value accepted by this parser
          *
          * @return Min value
+         * @deprecated see {@link IntegerParser#min()}
          */
+        @Deprecated
         public int getMin() {
+            return this.min;
+        }
+
+        /**
+         * Get the minimum value accepted by this parser
+         *
+         * @return Min value
+         */
+        public int min() {
             return this.min;
         }
 
@@ -295,8 +328,19 @@ public final class IntegerArgument<C> extends CommandArgument<C, Integer> {
          * Get the maximum value accepted by this parser
          *
          * @return Max value
+         * @deprecated see {@link IntegerParser#max()}
          */
+        @Deprecated
         public int getMax() {
+            return this.max;
+        }
+
+        /**
+         * Get the maximum value accepted by this parser
+         *
+         * @return Max value
+         */
+        public int max() {
             return this.max;
         }
 

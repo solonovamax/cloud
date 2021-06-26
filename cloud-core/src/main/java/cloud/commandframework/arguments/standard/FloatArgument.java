@@ -110,8 +110,19 @@ public final class FloatArgument<C> extends CommandArgument<C, Float> {
      * Get the minimum accepted float that could have been parsed
      *
      * @return Minimum float
+     * @deprecated see {@link FloatArgument#min()}
      */
+    @Deprecated
     public float getMin() {
+        return this.min;
+    }
+
+    /**
+     * Get the minimum accepted float that could have been parsed
+     *
+     * @return Minimum float
+     */
+    public float min() {
         return this.min;
     }
 
@@ -119,8 +130,19 @@ public final class FloatArgument<C> extends CommandArgument<C, Float> {
      * Get the maximum accepted float that could have been parsed
      *
      * @return Maximum float
+     * @deprecated see {@link FloatArgument#max()}
      */
+    @Deprecated
     public float getMax() {
+        return this.max;
+    }
+
+    /**
+     * Get the maximum accepted float that could have been parsed
+     *
+     * @return Maximum float
+     */
+    public float max() {
         return this.max;
     }
 
@@ -236,9 +258,31 @@ public final class FloatArgument<C> extends CommandArgument<C, Float> {
          * Get the max value
          *
          * @return Max value
+         * @deprecated see {@link FloatParser#max()}
          */
+        @Deprecated
         public float getMax() {
             return this.max;
+        }
+
+        /**
+         * Get the max value
+         *
+         * @return Max value
+         */
+        public float max() {
+            return this.getMax();
+        }
+
+        /**
+         * Get the min value
+         *
+         * @return Min value
+         * @deprecated see {@link FloatParser#min()}
+         */
+        @Deprecated
+        public float getMin() {
+            return this.min;
         }
 
         /**
@@ -246,8 +290,8 @@ public final class FloatArgument<C> extends CommandArgument<C, Float> {
          *
          * @return Min value
          */
-        public float getMin() {
-            return this.min;
+        public float min() {
+            return this.getMin();
         }
 
         /**

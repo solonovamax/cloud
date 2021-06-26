@@ -110,8 +110,19 @@ public final class LongArgument<C> extends CommandArgument<C, Long> {
      * Get the minimum accepted long that could have been parsed
      *
      * @return Minimum long
+     * @deprecated see {@link LongArgument#min()}
      */
+    @Deprecated
     public long getMin() {
+        return this.min;
+    }
+
+    /**
+     * Get the minimum accepted long that could have been parsed
+     *
+     * @return Minimum long
+     */
+    public long min() {
         return this.min;
     }
 
@@ -119,8 +130,19 @@ public final class LongArgument<C> extends CommandArgument<C, Long> {
      * Get the maximum accepted long that could have been parsed
      *
      * @return Maximum long
+     * @deprecated see {@link LongArgument#max()}
      */
+    @Deprecated
     public long getMax() {
+        return this.max;
+    }
+
+    /**
+     * Get the maximum accepted long that could have been parsed
+     *
+     * @return Maximum long
+     */
+    public long max() {
         return this.max;
     }
 
@@ -231,8 +253,19 @@ public final class LongArgument<C> extends CommandArgument<C, Long> {
          * Get the minimum value accepted by this parser
          *
          * @return Min value
+         * @deprecated see {@link LongArgument#min()}
          */
+        @Deprecated
         public long getMin() {
+            return this.min;
+        }
+
+        /**
+         * Get the minimum value accepted by this parser
+         *
+         * @return Min value
+         */
+        public long min() {
             return this.min;
         }
 
@@ -240,8 +273,19 @@ public final class LongArgument<C> extends CommandArgument<C, Long> {
          * Get the maximum value accepted by this parser
          *
          * @return Max value
+         * @deprecated see {@link LongArgument#max()}
          */
+        @Deprecated
         public long getMax() {
+            return this.max;
+        }
+
+        /**
+         * Get the maximum value accepted by this parser
+         *
+         * @return Max value
+         */
+        public long max() {
             return this.max;
         }
 

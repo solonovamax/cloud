@@ -181,8 +181,19 @@ public final class StringArgument<C> extends CommandArgument<C, String> {
      * Get the string mode
      *
      * @return String mode
+     * @deprecated see {@link StringArgument#stringMode()}
      */
+    @Deprecated
     public @NonNull StringMode getStringMode() {
+        return this.stringMode;
+    }
+
+    /**
+     * Get the string mode
+     *
+     * @return String mode
+     */
+    public @NonNull StringMode stringMode() {
         return this.stringMode;
     }
 
@@ -396,8 +407,19 @@ public final class StringArgument<C> extends CommandArgument<C, String> {
          * Get the string mode
          *
          * @return String mode
+         * @deprecated see {@link StringParser#stringMode()}
          */
+        @Deprecated
         public @NonNull StringMode getStringMode() {
+            return this.stringMode;
+        }
+
+        /**
+         * Get the string mode
+         *
+         * @return String mode
+         */
+        public @NonNull StringMode stringMode() {
             return this.stringMode;
         }
 
@@ -438,8 +460,19 @@ public final class StringArgument<C> extends CommandArgument<C, String> {
          * Get the input provided by the sender
          *
          * @return Input
+         * @deprecated see {@link StringParseException#input()}
          */
+        @Deprecated
         public @NonNull String getInput() {
+            return this.input;
+        }
+
+        /**
+         * Get the input provided by the sender
+         *
+         * @return Input
+         */
+        public @NonNull String input() {
             return this.input;
         }
 
@@ -447,8 +480,19 @@ public final class StringArgument<C> extends CommandArgument<C, String> {
          * Get the string mode
          *
          * @return String mode
+         * @deprecated see {@link StringParseException#stringMode()}
          */
+        @Deprecated
         public @NonNull StringMode getStringMode() {
+            return this.stringMode;
+        }
+
+        /**
+         * Get the string mode
+         *
+         * @return String mode
+         */
+        public @NonNull StringMode stringMode() {
             return this.stringMode;
         }
 

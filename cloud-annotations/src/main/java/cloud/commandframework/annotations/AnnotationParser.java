@@ -117,7 +117,7 @@ public final class AnnotationParser<C> {
                 annotation.value(),
                 Caption.of(annotation.failureCaption())
         ));
-        this.getParameterInjectorRegistry().registerInjector(
+        this.parameterInjectorRegistry().registerInjector(
                 String[].class,
                 (context, annotations) -> annotations.annotation(RawArgs.class) == null
                         ? null
@@ -235,8 +235,21 @@ public final class AnnotationParser<C> {
      *
      * @return Parameter injector registry
      * @since 1.2.0
+     * @deprecated see {@link AnnotationParser#parameterInjectorRegistry()}
      */
+    @Deprecated
     public @NonNull ParameterInjectorRegistry<C> getParameterInjectorRegistry() {
+        return this.manager.parameterInjectorRegistry();
+    }
+
+    /**
+     * Get the parameter injector registry instance that is used to inject non-{@link Argument argument} parameters
+     * into {@link CommandMethod} annotated {@link Method methods}
+     *
+     * @return Parameter injector registry
+     * @since 1.2.0
+     */
+    public @NonNull ParameterInjectorRegistry<C> parameterInjectorRegistry() {
         return this.manager.parameterInjectorRegistry();
     }
 
@@ -383,8 +396,8 @@ public final class AnnotationParser<C> {
     ) {
         final Collection<Command<C>> commands = new ArrayList<>();
         for (final CommandMethodPair commandMethodPair : methodPairs) {
-            final CommandMethod commandMethod = commandMethodPair.getCommandMethod();
-            final Method method = commandMethodPair.getMethod();
+            final CommandMethod commandMethod = commandMethodPair.commandMethod();
+            final Method method = commandMethodPair.method();
             final List<SyntaxFragment> tokens = this.syntaxParser.apply(commandMethod.value());
             /* Determine command name */
             final String commandToken = commandMethod.value().split(" ")[0].split("\\|")[0];
@@ -398,7 +411,7 @@ public final class AnnotationParser<C> {
             @SuppressWarnings("rawtypes")
             Command.Builder builder = manager.commandBuilder(
                     commandToken,
-                    tokens.get(0).getMinor(),
+                    tokens.get(0).minor(),
                     metaBuilder.build()
             );
             final Collection<ArgumentParameterPair> arguments = this.argumentExtractor.apply(method);
@@ -409,11 +422,11 @@ public final class AnnotationParser<C> {
             for (final ArgumentParameterPair argumentPair : arguments) {
                 final CommandArgument<C, ?> argument = this.buildArgument(
                         method,
-                        this.findSyntaxFragment(tokens, argumentPair.getArgument().value()),
+                        this.findSyntaxFragment(tokens, argumentPair.argument().value()),
                         argumentPair
                 );
                 commandArguments.put(argument.getName(), argument);
-                argumentDescriptions.put(argument, argumentPair.getArgument().description());
+                argumentDescriptions.put(argument, argumentPair.argument().description());
             }
             boolean commandNameFound = false;
             /* Build the command tree */
@@ -422,14 +435,14 @@ public final class AnnotationParser<C> {
                     commandNameFound = true;
                     continue;
                 }
-                if (token.getArgumentMode() == ArgumentMode.LITERAL) {
-                    builder = builder.literal(token.getMajor(), token.getMinor().toArray(new String[0]));
+                if (token.argumentMode() == ArgumentMode.LITERAL) {
+                    builder = builder.literal(token.major(), token.minor().toArray(new String[0]));
                 } else {
-                    final CommandArgument<C, ?> argument = commandArguments.get(token.getMajor());
+                    final CommandArgument<C, ?> argument = commandArguments.get(token.major());
                     if (argument == null) {
                         throw new IllegalArgumentException(String.format(
                                 "Found no mapping for argument '%s' in method '%s'",
-                                token.getMajor(), method.getName()
+                                token.major(), method.getName()
                         ));
                     }
 
@@ -465,7 +478,7 @@ public final class AnnotationParser<C> {
                         instance,
                         commandArguments,
                         method,
-                        this.getParameterInjectorRegistry()
+                        this.parameterInjectorRegistry()
                 );
                 builder = builder.handler(commandExecutionHandler);
             } catch (final Exception e) {
@@ -513,8 +526,8 @@ public final class AnnotationParser<C> {
             final @NonNull String argumentName
     ) {
         for (final SyntaxFragment fragment : fragments) {
-            if (fragment.getArgumentMode() != ArgumentMode.LITERAL
-                    && fragment.getMajor().equals(argumentName)) {
+            if (fragment.argumentMode() != ArgumentMode.LITERAL
+                    && fragment.major().equals(argumentName)) {
                 return fragment;
             }
         }
@@ -527,14 +540,14 @@ public final class AnnotationParser<C> {
             final @Nullable SyntaxFragment syntaxFragment,
             final @NonNull ArgumentParameterPair argumentPair
     ) {
-        final Parameter parameter = argumentPair.getParameter();
+        final Parameter parameter = argumentPair.parameter();
         final Collection<Annotation> annotations = Arrays.asList(parameter.getAnnotations());
         final TypeToken<?> token = TypeToken.get(parameter.getParameterizedType());
         final ParserParameters parameters = this.manager.getParserRegistry()
                 .parseAnnotations(token, annotations);
         /* Create the argument parser */
         final ArgumentParser<C, ?> parser;
-        if (argumentPair.getArgument().parserName().isEmpty()) {
+        if (argumentPair.argument().parserName().isEmpty()) {
             parser = this.manager.getParserRegistry()
                     .createParser(token, parameters)
                     .orElseThrow(() -> new IllegalArgumentException(
@@ -546,7 +559,7 @@ public final class AnnotationParser<C> {
                             )));
         } else {
             parser = this.manager.getParserRegistry()
-                    .createParser(argumentPair.getArgument().parserName(), parameters)
+                    .createParser(argumentPair.argument().parserName(), parameters)
                     .orElseThrow(() -> new IllegalArgumentException(
                             String.format("Parameter '%s' in method '%s' "
                                             + "has parser '%s' but no parser exists "
@@ -556,19 +569,19 @@ public final class AnnotationParser<C> {
                             )));
         }
         /* Check whether or not the corresponding method parameter actually exists */
-        if (syntaxFragment == null || syntaxFragment.getArgumentMode() == ArgumentMode.LITERAL) {
+        if (syntaxFragment == null || syntaxFragment.argumentMode() == ArgumentMode.LITERAL) {
             throw new IllegalArgumentException(String.format(
                     "Invalid command argument '%s' in method '%s': "
-                            + "Missing syntax mapping", argumentPair.getArgument().value(), method.getName()));
+                            + "Missing syntax mapping", argumentPair.argument().value(), method.getName()));
         }
-        final Argument argument = argumentPair.getArgument();
+        final Argument argument = argumentPair.argument();
         /* Create the argument builder */
         @SuppressWarnings("rawtypes") final CommandArgument.Builder argumentBuilder = CommandArgument.ofType(
                 parameter.getType(),
                 argument.value()
         );
         /* Set the argument requirement status */
-        if (syntaxFragment.getArgumentMode() == ArgumentMode.OPTIONAL) {
+        if (syntaxFragment.argumentMode() == ArgumentMode.OPTIONAL) {
             if (argument.defaultValue().isEmpty()) {
                 argumentBuilder.asOptional();
             } else {
@@ -614,7 +627,7 @@ public final class AnnotationParser<C> {
     }
 
     @NonNull Map<@NonNull Class<@NonNull ? extends Annotation>,
-            @NonNull Function<@NonNull ? extends Annotation, @NonNull ParserParameters>> getAnnotationMappers() {
+            @NonNull Function<@NonNull ? extends Annotation, @NonNull ParserParameters>> annotationMappers() {
         return this.annotationMappers;
     }
 

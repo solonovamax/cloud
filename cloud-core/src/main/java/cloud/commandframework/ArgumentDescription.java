@@ -74,7 +74,9 @@ public interface ArgumentDescription {
      *
      * @return Command description
      */
-    @NonNull String description();
+    default @NonNull String description() {
+        return this.getDescription();
+    }
 
     /**
      * Get whether or not this description contains contents.

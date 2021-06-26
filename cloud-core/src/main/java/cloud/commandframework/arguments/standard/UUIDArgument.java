@@ -188,8 +188,19 @@ public final class UUIDArgument<C> extends CommandArgument<C, UUID> {
          * Get the supplied input
          *
          * @return String value
+         * @deprecated see {@link UUIDParseException#input()}
          */
+        @Deprecated
         public String getInput() {
+            return this.input;
+        }
+
+        /**
+         * Get the supplied input
+         *
+         * @return String value
+         */
+        public String input() {
             return this.input;
         }
 

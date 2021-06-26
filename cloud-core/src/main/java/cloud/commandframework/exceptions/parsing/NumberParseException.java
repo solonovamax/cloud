@@ -68,8 +68,19 @@ public abstract class NumberParseException extends ParserException {
      * Get the number type
      *
      * @return Number type
+     * @deprecated see {@link NumberParseException#numberType()}
      */
+    @Deprecated
     public abstract @NonNull String getNumberType();
+
+    /**
+     * Get the number type
+     *
+     * @return Number type
+     */
+    public @NonNull String numberType() {
+        return this.getNumberType();
+    }
 
     /**
      * If the parser had a maximum value
@@ -89,9 +100,31 @@ public abstract class NumberParseException extends ParserException {
      * Get the input that failed to parse
      *
      * @return Input
+     * @deprecated see {@link NumberParseException#input()}
      */
+    @Deprecated
     public @NonNull String getInput() {
         return this.input;
+    }
+
+    /**
+     * Get the input that failed to parse
+     *
+     * @return Input
+     */
+    public @NonNull String input() {
+        return this.getInput();
+    }
+
+    /**
+     * Get the minimum accepted integer that could have been parsed
+     *
+     * @return Minimum integer
+     * @deprecated see {@link NumberParseException#min()}
+     */
+    @Deprecated
+    public Number getMin() {
+        return this.min;
     }
 
     /**
@@ -99,7 +132,7 @@ public abstract class NumberParseException extends ParserException {
      *
      * @return Minimum integer
      */
-    public Number getMin() {
+    public Number min() {
         return this.min;
     }
 
@@ -107,8 +140,19 @@ public abstract class NumberParseException extends ParserException {
      * Get the maximum accepted integer that could have been parsed
      *
      * @return Maximum integer
+     * @deprecated see {@link NumberParseException#max()}
      */
+    @Deprecated
     public Number getMax() {
+        return this.max;
+    }
+
+    /**
+     * Get the maximum accepted integer that could have been parsed
+     *
+     * @return Maximum integer
+     */
+    public Number max() {
         return this.max;
     }
 

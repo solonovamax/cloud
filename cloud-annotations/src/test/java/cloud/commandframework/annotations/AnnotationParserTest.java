@@ -75,7 +75,7 @@ class AnnotationParserTest {
                 (context, input) -> NAMED_SUGGESTIONS
         );
         /* Register a parameter injector */
-        annotationParser.getParameterInjectorRegistry().registerInjector(
+        annotationParser.parameterInjectorRegistry().registerInjector(
                 InjectableValue.class,
                 (context, annotations) -> new InjectableValue("Hello World!")
         );

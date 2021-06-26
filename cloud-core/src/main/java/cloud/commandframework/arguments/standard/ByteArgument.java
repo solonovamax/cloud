@@ -110,8 +110,19 @@ public final class ByteArgument<C> extends CommandArgument<C, Byte> {
      * Get the minimum accepted byteeger that could have been parsed
      *
      * @return Minimum byteeger
+     * @deprecated see {@link ByteArgument#min()}
      */
+    @Deprecated
     public byte getMin() {
+        return this.min;
+    }
+
+    /**
+     * Get the minimum accepted byteeger that could have been parsed
+     *
+     * @return Minimum byteeger
+     */
+    public byte min() {
         return this.min;
     }
 
@@ -119,8 +130,19 @@ public final class ByteArgument<C> extends CommandArgument<C, Byte> {
      * Get the maximum accepted byteeger that could have been parsed
      *
      * @return Maximum byteeger
+     * @deprecated see {@link ByteArgument#max()}
      */
+    @Deprecated
     public byte getMax() {
+        return this.max;
+    }
+
+    /**
+     * Get the maximum accepted byteeger that could have been parsed
+     *
+     * @return Maximum byteeger
+     */
+    public byte max() {
         return this.max;
     }
 
@@ -249,9 +271,32 @@ public final class ByteArgument<C> extends CommandArgument<C, Byte> {
          * Get the max value
          *
          * @return Max value
+         * @deprecated see {@link ByteParser#max()}
          */
+        @Deprecated
         public byte getMax() {
             return this.max;
+        }
+
+        /**
+         * Get the max value
+         *
+         * @return Max value
+         */
+        public byte max() {
+            return this.max;
+        }
+
+
+        /**
+         * Get the min value
+         *
+         * @return Min value
+         * @deprecated see {@link ByteParser#min()}
+         */
+        @Deprecated
+        public byte getMin() {
+            return this.min;
         }
 
         /**
@@ -259,7 +304,7 @@ public final class ByteArgument<C> extends CommandArgument<C, Byte> {
          *
          * @return Min value
          */
-        public byte getMin() {
+        public byte min() {
             return this.min;
         }
 

@@ -140,11 +140,11 @@ public final class CloudBrigadierManager<C, S> {
         /* Map byte, short and int to IntegerArgumentType */
         this.registerMapping(new TypeToken<ByteArgument.ByteParser<C>>() {
         }, builder -> builder.to(argument -> {
-            return IntegerArgumentType.integer(argument.getMin(), argument.getMax());
+            return IntegerArgumentType.integer(argument.min(), argument.max());
         }));
         this.registerMapping(new TypeToken<ShortArgument.ShortParser<C>>() {
         }, builder -> builder.to(argument -> {
-            return IntegerArgumentType.integer(argument.getMin(), argument.getMax());
+            return IntegerArgumentType.integer(argument.min(), argument.max());
         }));
         this.registerMapping(new TypeToken<IntegerArgument.IntegerParser<C>>() {
         }, builder -> builder.to(argument -> {
@@ -152,12 +152,12 @@ public final class CloudBrigadierManager<C, S> {
                 return IntegerArgumentType.integer();
             }
             if (argument.hasMin() && !argument.hasMax()) {
-                return IntegerArgumentType.integer(argument.getMin());
+                return IntegerArgumentType.integer(argument.min());
             } else if (!argument.hasMin()) {
                 // Brig uses Integer.MIN_VALUE and Integer.MAX_VALUE for default min/max
-                return IntegerArgumentType.integer(Integer.MIN_VALUE, argument.getMax());
+                return IntegerArgumentType.integer(Integer.MIN_VALUE, argument.max());
             }
-            return IntegerArgumentType.integer(argument.getMin(), argument.getMax());
+            return IntegerArgumentType.integer(argument.min(), argument.max());
         }));
         /* Map float to FloatArgumentType */
         this.registerMapping(new TypeToken<FloatArgument.FloatParser<C>>() {
@@ -166,12 +166,12 @@ public final class CloudBrigadierManager<C, S> {
                 return FloatArgumentType.floatArg();
             }
             if (argument.hasMin() && !argument.hasMax()) {
-                return FloatArgumentType.floatArg(argument.getMin());
+                return FloatArgumentType.floatArg(argument.min());
             } else if (!argument.hasMin()) {
                 // Brig uses -Float.MAX_VALUE and Float.MAX_VALUE for default min/max
-                return FloatArgumentType.floatArg(-Float.MAX_VALUE, argument.getMax());
+                return FloatArgumentType.floatArg(-Float.MAX_VALUE, argument.max());
             }
-            return FloatArgumentType.floatArg(argument.getMin(), argument.getMax());
+            return FloatArgumentType.floatArg(argument.min(), argument.max());
         }));
         /* Map double to DoubleArgumentType */
         this.registerMapping(new TypeToken<DoubleArgument.DoubleParser<C>>() {
@@ -180,12 +180,12 @@ public final class CloudBrigadierManager<C, S> {
                 return DoubleArgumentType.doubleArg();
             }
             if (argument.hasMin() && !argument.hasMax()) {
-                return DoubleArgumentType.doubleArg(argument.getMin());
+                return DoubleArgumentType.doubleArg(argument.min());
             } else if (!argument.hasMin()) {
                 // Brig uses -Double.MAX_VALUE and Double.MAX_VALUE for default min/max
-                return DoubleArgumentType.doubleArg(-Double.MAX_VALUE, argument.getMax());
+                return DoubleArgumentType.doubleArg(-Double.MAX_VALUE, argument.max());
             }
-            return DoubleArgumentType.doubleArg(argument.getMin(), argument.getMax());
+            return DoubleArgumentType.doubleArg(argument.min(), argument.max());
         }));
         /* Map long parser to LongArgumentType */
         this.registerMapping(new TypeToken<LongArgument.LongParser<C>>() {
@@ -194,12 +194,12 @@ public final class CloudBrigadierManager<C, S> {
                 return LongArgumentType.longArg();
             }
             if (longParser.hasMin() && !longParser.hasMax()) {
-                return LongArgumentType.longArg(longParser.getMin());
+                return LongArgumentType.longArg(longParser.min());
             } else if (!longParser.hasMin()) {
                 // Brig uses Long.MIN_VALUE and Long.MAX_VALUE for default min/max
-                return LongArgumentType.longArg(Long.MIN_VALUE, longParser.getMax());
+                return LongArgumentType.longArg(Long.MIN_VALUE, longParser.max());
             }
-            return LongArgumentType.longArg(longParser.getMin(), longParser.getMax());
+            return LongArgumentType.longArg(longParser.min(), longParser.max());
         }));
         /* Map boolean to BoolArgumentType */
         this.registerMapping(new TypeToken<BooleanArgument.BooleanParser<C>>() {
@@ -207,7 +207,7 @@ public final class CloudBrigadierManager<C, S> {
         /* Map String properly to StringArgumentType */
         this.registerMapping(new TypeToken<StringArgument.StringParser<C>>() {
         }, builder -> builder.cloudSuggestions().to(argument -> {
-            switch (argument.getStringMode()) {
+            switch (argument.stringMode()) {
                 case QUOTED:
                     return StringArgumentType.string();
                 case GREEDY:

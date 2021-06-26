@@ -107,8 +107,19 @@ public final class ShortArgument<C> extends CommandArgument<C, Short> {
      * Get the minimum accepted short that could have been parsed
      *
      * @return Minimum short
+     * @deprecated see {@link ShortArgument#min()}
      */
+    @Deprecated
     public short getMin() {
+        return this.min;
+    }
+
+    /**
+     * Get the minimum accepted short that could have been parsed
+     *
+     * @return Minimum short
+     */
+    public short min() {
         return this.min;
     }
 
@@ -116,8 +127,19 @@ public final class ShortArgument<C> extends CommandArgument<C, Short> {
      * Get the maximum accepted short that could have been parsed
      *
      * @return Maximum short
+     * @deprecated see {@link ShortArgument#max()}
      */
+    @Deprecated
     public short getMax() {
+        return this.max;
+    }
+
+    /**
+     * Get the maximum accepted short that could have been parsed
+     *
+     * @return Maximum short
+     */
+    public short max() {
         return this.max;
     }
 
@@ -241,8 +263,19 @@ public final class ShortArgument<C> extends CommandArgument<C, Short> {
          * Get the max value
          *
          * @return Max value
+         * @deprecated see {@link ShortParser#max()}
          */
+        @Deprecated
         public short getMax() {
+            return this.max;
+        }
+
+        /**
+         * Get the max value
+         *
+         * @return Max value
+         */
+        public short max() {
             return this.max;
         }
 
@@ -250,8 +283,19 @@ public final class ShortArgument<C> extends CommandArgument<C, Short> {
          * Get the min value
          *
          * @return Min value
+         * @deprecated see {@link ShortParser#min()}
          */
+        @Deprecated
         public short getMin() {
+            return this.min;
+        }
+
+        /**
+         * Get the min value
+         *
+         * @return Min value
+         */
+        public short min() {
             return this.min;
         }
 

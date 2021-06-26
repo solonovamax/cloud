@@ -40,11 +40,11 @@ final class CommandMethodPair {
         this.commandMethod = commandMethod;
     }
 
-    @NonNull Method getMethod() {
+    @NonNull Method method() {
         return this.method;
     }
 
-    @NonNull CommandMethod getCommandMethod() {
+    @NonNull CommandMethod commandMethod() {
         return this.commandMethod;
     }
 

@@ -40,11 +40,11 @@ final class ArgumentParameterPair {
         this.argument = argument;
     }
 
-    @NonNull Parameter getParameter() {
+    @NonNull Parameter parameter() {
         return this.parameter;
     }
 
-    @NonNull Argument getArgument() {
+    @NonNull Argument argument() {
         return this.argument;
     }
 

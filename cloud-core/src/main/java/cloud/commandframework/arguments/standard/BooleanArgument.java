@@ -265,8 +265,19 @@ public final class BooleanArgument<C> extends CommandArgument<C, Boolean> {
          * Get the supplied input
          *
          * @return String value
+         * @deprecated see {@link BooleanParseException#input()}
          */
+        @Deprecated
         public String getInput() {
+            return this.input;
+        }
+
+        /**
+         * Get the supplied input
+         *
+         * @return String value
+         */
+        public String input() {
             return this.input;
         }
 

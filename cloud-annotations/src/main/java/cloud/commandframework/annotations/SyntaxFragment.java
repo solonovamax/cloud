@@ -43,15 +43,15 @@ final class SyntaxFragment {
         this.argumentMode = argumentMode;
     }
 
-    @NonNull String getMajor() {
+    @NonNull String major() {
         return this.major;
     }
 
-    @NonNull List<@NonNull String> getMinor() {
+    @NonNull List<@NonNull String> minor() {
         return this.minor;
     }
 
-    @NonNull ArgumentMode getArgumentMode() {
+    @NonNull ArgumentMode argumentMode() {
         return this.argumentMode;
     }
 

@@ -181,8 +181,19 @@ public final class CharArgument<C> extends CommandArgument<C, Character> {
          * Get the supplied input
          *
          * @return Input value
+         * @deprecated see {@link CharParseException#input()}
          */
+        @Deprecated
         public @NonNull String getInput() {
+            return this.input;
+        }
+
+        /**
+         * Get the supplied input
+         *
+         * @return Input value
+         */
+        public @NonNull String input() {
             return this.input;
         }
 

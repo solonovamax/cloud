@@ -110,8 +110,19 @@ public final class DoubleArgument<C> extends CommandArgument<C, Double> {
      * Get the minimum accepted double that could have been parsed
      *
      * @return Minimum double
+     * @deprecated see {@link DoubleArgument#min()}
      */
+    @Deprecated
     public double getMin() {
+        return this.min;
+    }
+
+    /**
+     * Get the minimum accepted double that could have been parsed
+     *
+     * @return Minimum double
+     */
+    public double min() {
         return this.min;
     }
 
@@ -119,8 +130,19 @@ public final class DoubleArgument<C> extends CommandArgument<C, Double> {
      * Get the maximum accepted double that could have been parsed
      *
      * @return Maximum double
+     * @deprecated see {@link DoubleArgument#max()}
      */
+    @Deprecated
     public double getMax() {
+        return this.max;
+    }
+
+    /**
+     * Get the maximum accepted double that could have been parsed
+     *
+     * @return Maximum double
+     */
+    public double max() {
         return this.max;
     }
 
@@ -241,8 +263,19 @@ public final class DoubleArgument<C> extends CommandArgument<C, Double> {
          * Get the max value
          *
          * @return Max value
+         * @deprecated see {@link DoubleParser#max()}
          */
+        @Deprecated
         public double getMax() {
+            return this.max;
+        }
+
+        /**
+         * Get the max value
+         *
+         * @return Max value
+         */
+        public double max() {
             return this.max;
         }
 
@@ -250,8 +283,19 @@ public final class DoubleArgument<C> extends CommandArgument<C, Double> {
          * Get the min value
          *
          * @return Min value
+         * @deprecated see {@link DoubleParser#min()}
          */
+        @Deprecated
         public double getMin() {
+            return this.min;
+        }
+
+        /**
+         * Get the min value
+         *
+         * @return Min value
+         */
+        public double min() {
             return this.min;
         }
 
