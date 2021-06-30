@@ -44,6 +44,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -59,7 +60,7 @@ public class JDACommandManager<C> extends CommandManager<C> {
     private final JDA jda;
     private final long botId;
 
-    private final Function<@NonNull C, @NonNull String> prefixMapper;
+    private final Function<@NonNull C, @NonNull List<String>> prefixMapper;
     private final BiFunction<@NonNull C, @NonNull String, @NonNull Boolean> permissionMapper;
     private final Function<@NonNull MessageReceivedEvent, @NonNull C> commandSenderMapper;
     private final Function<@NonNull C, @NonNull MessageReceivedEvent> backwardsCommandSenderMapper;
@@ -68,7 +69,7 @@ public class JDACommandManager<C> extends CommandManager<C> {
      * Construct a new JDA Command Manager
      *
      * @param jda                          JDA instance to register against
-     * @param prefixMapper                 Function that maps the sender to a command prefix string
+     * @param prefixMapper                 Function that maps the sender to a prefix string(s)
      * @param permissionMapper             Function used to check if a command sender has the permission to execute a command
      * @param commandExecutionCoordinator  Execution coordinator instance. The coordinator is in charge of executing incoming
      *                                     commands. Some considerations must be made when picking a suitable execution coordinator
@@ -84,7 +85,7 @@ public class JDACommandManager<C> extends CommandManager<C> {
      */
     public JDACommandManager(
             final @NonNull JDA jda,
-            final @NonNull Function<@NonNull C, @NonNull String> prefixMapper,
+            final @NonNull Function<@NonNull C, @NonNull List<String>> prefixMapper,
             final @Nullable BiFunction<@NonNull C, @NonNull String, @NonNull Boolean> permissionMapper,
             final @NonNull Function<CommandTree<C>, CommandExecutionCoordinator<C>> commandExecutionCoordinator,
             final @NonNull Function<@NonNull MessageReceivedEvent, @NonNull C> commandSenderMapper,
@@ -134,7 +135,7 @@ public class JDACommandManager<C> extends CommandManager<C> {
      *
      * @return Prefix mapper
      */
-    public final @NonNull Function<@NonNull C, @NonNull String> getPrefixMapper() {
+    public final @NonNull Function<@NonNull C, @NonNull List<String>> getPrefixMapper() {
         return this.prefixMapper;
     }
 

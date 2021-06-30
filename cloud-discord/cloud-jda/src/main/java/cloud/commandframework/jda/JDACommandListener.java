@@ -68,16 +68,25 @@ public class JDACommandListener<C> extends ListenerAdapter {
             return;
         }
 
-        final String prefix = this.commandManager.getPrefixMapper().apply(sender);
-        String content = message.getContentRaw();
+        final String rawMessage = message.getContentRaw();
 
-        if (!content.startsWith(prefix)) {
-            return;
+        String usedPrefix = null;
+        String commandString = null;
+        for (final String prefix : this.commandManager.getPrefixMapper().apply(sender)) {
+            if (rawMessage.startsWith(prefix)) {
+                usedPrefix = prefix;
+                commandString = rawMessage.substring(prefix.length());
+                break;
+            }
         }
 
-        content = content.substring(prefix.length());
+        if (usedPrefix == null) {
+            return;
+        }
+        final String finalUsedPrefix = usedPrefix; // lambda moment
 
-        this.commandManager.executeCommand(sender, content)
+
+        this.commandManager.executeCommand(sender, commandString)
                 .whenComplete((commandResult, throwable) -> {
                     if (throwable == null) {
                         return;
@@ -88,7 +97,7 @@ public class JDACommandListener<C> extends ListenerAdapter {
                                 InvalidSyntaxException.class,
                                 (InvalidSyntaxException) throwable, (c, e) -> this.sendMessage(
                                         event,
-                                        MESSAGE_INVALID_SYNTAX + prefix + ((InvalidSyntaxException) throwable)
+                                        MESSAGE_INVALID_SYNTAX + finalUsedPrefix + ((InvalidSyntaxException) throwable)
                                                 .getCorrectSyntax()
                                 )
                         );

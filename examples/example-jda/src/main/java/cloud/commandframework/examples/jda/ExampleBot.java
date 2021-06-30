@@ -42,6 +42,9 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.security.auth.login.LoginException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public final class ExampleBot {
 
@@ -69,7 +72,7 @@ public final class ExampleBot {
 
         final JDA4CommandManager<CustomUser> commandManager = new JDA4CommandManager<>(
                 jda,
-                message -> "!",
+                message -> Collections.singletonList("!"),
                 (sender, permission) -> permissionRegistry.hasPermission(sender.getUser().getIdLong(), permission),
                 CommandExecutionCoordinator.simpleCoordinator(),
                 sender -> {

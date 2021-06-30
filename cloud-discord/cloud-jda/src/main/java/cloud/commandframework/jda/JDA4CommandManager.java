@@ -29,6 +29,7 @@ import net.dv8tion.jda.api.JDA;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -61,7 +62,7 @@ public class JDA4CommandManager<C> extends JDACommandManager<C> {
      */
     public JDA4CommandManager(
             final @NonNull JDA jda,
-            final @NonNull Function<@NonNull C, @NonNull String> prefixMapper,
+            final @NonNull Function<@NonNull C, @NonNull List<String>> prefixMapper,
             final @Nullable BiFunction<@NonNull C, @NonNull String, @NonNull Boolean> permissionMapper,
             final @NonNull Function<CommandTree<C>, CommandExecutionCoordinator<C>> commandExecutionCoordinator,
             final @NonNull Function<@NonNull JDACommandSender, @NonNull C> commandSenderMapper,
