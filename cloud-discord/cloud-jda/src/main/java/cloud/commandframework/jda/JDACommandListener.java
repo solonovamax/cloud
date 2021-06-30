@@ -64,6 +64,9 @@ public class JDACommandListener<C> extends ListenerAdapter {
         final Message message = event.getMessage();
         final C sender = this.commandManager.getCommandSenderMapper().apply(event);
 
+        if (event.isWebhookMessage() || event.getAuthor().isBot()) { // could be merged with below if case, but looks cleaner
+            return;
+        }
         if (this.commandManager.getBotId() == event.getAuthor().getIdLong()) {
             return;
         }
